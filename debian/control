@@ -1,0 +1,12 @@
+Source: ros-groovy-rqt-tf-tree
+Section: misc
+Priority: extra
+Maintainer: Aaron Blasdel <ablasdel@gmail.com>
+Build-Depends: debhelper (>= 7.0.50~), ros-groovy-catkin
+Homepage: http://ros.org/wiki/rqt_tf_tree
+Standards-Version: 3.9.2
+
+Package: ros-groovy-rqt-tf-tree
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ros-groovy-rqt-gui,python-rospkg,ros-groovy-rqt-graph,ros-groovy-rospy,ros-groovy-qt-dotgraph,ros-groovy-geometry-msgs
+Description: rqt_tf_tree provides a GUI plugin for visualizing the ROS TF frame tree.
