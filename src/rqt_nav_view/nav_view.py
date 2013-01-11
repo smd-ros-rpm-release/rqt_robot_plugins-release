@@ -32,15 +32,28 @@
 
 import rospy
 import tf
+from tf.transformations import quaternion_from_euler
 
 import numpy
 import random
+from math import sqrt, atan, pi, degrees
 
 from nav_msgs.msg import OccupancyGrid, Path
-from geometry_msgs.msg import PolygonStamped, PointStamped
+from geometry_msgs.msg import PolygonStamped, PointStamped, PoseWithCovarianceStamped, PoseStamped
 
-from python_qt_binding.QtCore import Signal, QPointF
-from python_qt_binding.QtGui import QWidget, QPixmap, QImage, QGraphicsView, QGraphicsScene, QPainterPath, QPen, QPolygonF, QVBoxLayout, QColor, qRgb
+from python_qt_binding.QtCore import Signal, Slot, QPointF, qWarning, Qt
+from python_qt_binding.QtGui import QWidget, QPixmap, QImage, QGraphicsView, QGraphicsScene, QPainterPath, QPen, QPolygonF, QVBoxLayout, QHBoxLayout, QColor, qRgb, QPushButton
+
+from rqt_py_common.topic_helpers import get_field_type
+
+def accepted_topic(topic):
+    msg_types = [OccupancyGrid, Path, PolygonStamped, PointStamped]
+    msg_type, array = get_field_type(topic)
+
+    if not array and msg_type in msg_types:
+        return True
+    else:
+        return False
 
 
 class PathInfo(object):
@@ -57,16 +70,76 @@ class PathInfo(object):
 class NavViewWidget(QWidget):
 
     def __init__(self, map_topic='/map',
-                 paths=['/move_base/SBPLLatticePlanner/plan', '/move_base/TrajectoryPlannerROS/local_plan'],
+                 paths=['/move_base/NavFn/plan', '/move_base/TrajectoryPlannerROS/local_plan'],
                  polygons=['/move_base/local_costmap/robot_footprint']):
         super(NavViewWidget, self).__init__()
         self._layout = QVBoxLayout()
+        self._button_layout = QHBoxLayout()
 
+        self.setAcceptDrops(True)
         self.setWindowTitle('Navigation Viewer')
-        self._nav_view = NavView(map_topic, paths, polygons)
+
+        self.paths = paths
+        self.polygons = polygons
+        self.map = map_topic
+        self._tf = tf.TransformListener()
+
+        self._nav_view = NavView(map_topic, paths, polygons, tf = self._tf, parent = self)
+
+        self._set_pose = QPushButton('Set Pose')
+        self._set_pose.clicked.connect(self._nav_view.pose_mode)
+        self._set_goal = QPushButton('Set Goal')
+        self._set_goal.clicked.connect(self._nav_view.goal_mode)
+
+        self._button_layout.addWidget(self._set_pose)
+        self._button_layout.addWidget(self._set_goal)
+
+        self._layout.addLayout(self._button_layout)
+
         self._layout.addWidget(self._nav_view)
 
         self.setLayout(self._layout)
+
+    def dragEnterEvent(self, e):
+        if not e.mimeData().hasText():
+            if not hasattr(e.source(), 'selectedItems') or len(e.source().selectedItems()) == 0:
+                qWarning('NavView.dragEnterEvent(): not hasattr(event.source(), selectedItems) or len(event.source().selectedItems()) == 0')
+                return
+            item = e.source().selectedItems()[0]
+            topic_name = item.data(0, Qt.UserRole)
+            if topic_name == None:
+                qWarning('NavView.dragEnterEvent(): not hasattr(item, ros_topic_name_)')
+                return
+
+        else:
+            topic_name = str(e.mimeData().text())
+
+        if accepted_topic(topic_name):
+            e.accept()
+            e.acceptProposedAction()
+
+    def dropEvent(self, e):
+        if e.mimeData().hasText():
+            topic_name = str(e.mimeData().text())
+        else:
+            droped_item = e.source().selectedItems()[0]
+            topic_name = str(droped_item.data(0, Qt.UserRole))
+
+        topic_type, array = get_field_type(topic_name)
+        if not array:
+            if topic_type is OccupancyGrid:
+                self.map = topic_name
+
+                # Swap out the nav view for one with the new topics
+                self._nav_view.close()
+                self._nav_view = NavView(self.map, self.paths, self.polygons, self._tf, self)
+                self._layout.addWidget(self._nav_view)
+            elif topic_type is Path:
+                self.paths.append(topic_name)
+                self._nav_view.add_path(topic_name)
+            elif topic_type is PolygonStamped:
+                self.polygons.append(topic_name)
+                self._nav_view.add_polygon(topic_name)
 
 
 class NavView(QGraphicsView):
@@ -76,8 +149,14 @@ class NavView(QGraphicsView):
 
     def __init__(self, map_topic='/map',
                  paths=['/move_base/SBPLLatticePlanner/plan', '/move_base/TrajectoryPlannerROS/local_plan'],
-                 polygons=['/move_base/local_costmap/robot_footprint']):
+                 polygons=['/move_base/local_costmap/robot_footprint'], tf=None, parent=None):
         super(NavView, self).__init__()
+        self._parent = parent
+
+        self._pose_mode = False
+        self._goal_mode = False
+        self.last_path = None
+
 
         self.map_changed.connect(self._update)
         self.destroyed.connect(self.close)
@@ -100,7 +179,10 @@ class NavView(QGraphicsView):
 
         self._scene = QGraphicsScene()
 
-        self._tf = tf.TransformListener()
+        if tf is None:
+            self._tf = tf.TransformListener()
+        else:
+            self._tf = tf
         self.map_sub = rospy.Subscriber('/map', OccupancyGrid, self.map_cb)
 
         for path in paths:
@@ -109,7 +191,28 @@ class NavView(QGraphicsView):
         for poly in polygons:
             self.add_polygon(poly)
 
+        self._pose_pub = rospy.Publisher('/initialpose', PoseWithCovarianceStamped)
+        self._goal_pub = rospy.Publisher('/move_base_simple/goal', PoseStamped)
+
         self.setScene(self._scene)
+
+    def add_dragdrop(self, item):
+        # Add drag and drop functionality to all the items in the view
+        def c(x, e):
+            self.dragEnterEvent(e)
+        def d(x, e):
+            self.dropEvent(e)
+        item.setAcceptDrops(True)
+        item.dragEnterEvent = c
+        item.dropEvent = d
+
+    def dragEnterEvent(self, e):
+        if self._parent:
+            self._parent.dragEnterEvent(e)
+
+    def dropEvent(self, e):
+        if self._parent:
+            self._parent.dropEvent(e)
 
     def wheelEvent(self, event):
         event.ignore()
@@ -130,10 +233,10 @@ class NavView(QGraphicsView):
             a = numpy.append(a, e, axis=1)
         image = QImage(a.reshape((a.shape[0] * a.shape[1])), self.w, self.h, QImage.Format_Indexed8)
 
-        for i in range(101):
-            image.setColor(i, qRgb(i * 2.55, i * 2.55, i * 2.55))
+        for i in reversed(range(101)):
+            image.setColor(100 - i, qRgb(i* 2.55, i * 2.55, i * 2.55))
         image.setColor(101, qRgb(255, 0, 0))  # not used indices
-        image.setColor(255, qRgb(0, 0, 150))  # color for unknown value -1
+        image.setColor(255, qRgb(200, 200, 200))  # color for unknown value -1
         self._map = image
         self.setSceneRect(0, 0, self.w, self.h)
         self.map_changed.emit()
@@ -142,6 +245,9 @@ class NavView(QGraphicsView):
         path = PathInfo(name)
 
         def c(msg):
+            if not self._map:
+                return
+
             pp = QPainterPath()
 
             # Transform everything in to the map frame
@@ -178,6 +284,9 @@ class NavView(QGraphicsView):
         poly = PathInfo(name)
 
         def c(msg):
+            if not self._map:
+                return
+
             if not (msg.header.frame_id == '/map' or msg.header.frame_id == ''):
                 try:
                     self._tf.waitForTransform(msg.header.frame_id, '/map', rospy.Time(), rospy.Duration(10))
@@ -214,6 +323,100 @@ class NavView(QGraphicsView):
 
         self._polygons[name] = poly
 
+    def pose_mode(self):
+        if not self._pose_mode:
+            self._pose_mode = True
+            self._goal_mode = False
+            self.setDragMode(QGraphicsView.NoDrag)
+        elif self._pose_mode:
+            self._pose_mode = False
+            self.setDragMode(QGraphicsView.ScrollHandDrag)
+
+    def goal_mode(self):
+        if not self._goal_mode:
+            self._goal_mode = True
+            self._pose_mode = False
+            self.setDragMode(QGraphicsView.NoDrag)
+        elif self._goal_mode:
+            self._goal_mode = False
+            self.setDragMode(QGraphicsView.ScrollHandDrag)
+
+    def draw_position(self, e, mirror=True):
+        p = self.mapToScene(e.x(), e.y())
+        v = (p.x() - self.drag_start[0], p.y() - self.drag_start[1])
+        mag = sqrt(pow(v[0], 2) + pow(v[1], 2))
+        u = (v[0]/mag, v[1]/mag)
+
+        res = (u[0]*20, u[1]*20)
+        path = self._scene.addLine(self.drag_start[0], self.drag_start[1],
+                                   self.drag_start[0] + res[0], self.drag_start[1] + res[1])
+
+        if self.last_path:
+            self._scene.removeItem(self.last_path)
+            self.last_path = None
+        self.last_path = path
+
+        if mirror:
+            # Mirror point over x axis
+            x = ((self.w / 2) - self.drag_start[0]) + (self.w /2)
+        else:
+            x = self.drag_start[0]
+
+        map_p = [x * self.resolution, self.drag_start[1] * self.resolution]
+
+        angle = atan(u[1] / u[0])
+        quat = quaternion_from_euler(0, 0, degrees(angle))
+
+        return map_p, quat
+
+    def mousePressEvent(self, e):
+        if self._goal_mode or self._pose_mode:
+            p = self.mapToScene(e.x(), e.y())
+            self.drag_start = (p.x(), p.y())
+        else:
+            super(NavView, self).mousePressEvent(e)
+
+    def mouseReleaseEvent(self, e):
+        if self._goal_mode:
+            self._goal_mode = False
+            map_p, quat = self.draw_position(e)
+
+            msg = PoseStamped()
+            msg.header.frame_id = '/map'
+            msg.header.stamp = rospy.Time.now()
+
+            msg.pose.position.x = map_p[0]
+            msg.pose.position.y = map_p[1]
+            msg.pose.orientation.w = quat[0]
+            msg.pose.orientation.z = quat[3]
+
+            self._goal_pub.publish(msg)
+
+        elif self._pose_mode:
+            self._pose_mode = False
+            map_p, quat = self.draw_position(e)
+
+            msg = PoseWithCovarianceStamped()
+            msg.header.frame_id = '/map'
+            msg.header.stamp = rospy.Time.now()
+
+            #TODO: Is it ok to just ignore the covariance matrix here?
+            msg.pose.pose.orientation.w = quat[0]
+            msg.pose.pose.orientation.z = quat[3]
+            msg.pose.pose.position.x = map_p[0]
+            msg.pose.pose.position.y = map_p[1]
+
+            self._pose_pub.publish(msg)
+
+        # Clean up the path
+        if self.last_path:
+            self._scene.removeItem(self.last_path)
+            self.last_path = None
+
+    #def mouseMoveEvent(self, e):
+    #    if e.buttons() == Qt.LeftButton and (self._pose_mode or self._goal_mode):
+    #        map_p, quat = self.draw_position(e)
+
     def close(self):
         if self.map_sub:
             self.map_sub.unregister()
@@ -225,6 +428,8 @@ class NavView(QGraphicsView):
             if p.sub:
                 p.sub.unregister()
 
+        super(NavView, self).close()
+
     def _update(self):
         if self._map_item:
             self._scene.removeItem(self._map_item)
@@ -234,6 +439,9 @@ class NavView(QGraphicsView):
 
         # Everything must be mirrored
         self._mirror(self._map_item)
+
+        # Add drag and drop functionality
+        self.add_dragdrop(self._map_item)
 
         self.centerOn(self._map_item)
         self.show()
