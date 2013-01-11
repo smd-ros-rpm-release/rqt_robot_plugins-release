@@ -1,14 +1,14 @@
 <package>
   <name>rqt_rviz</name>
-  <version>0.2.7</version>
+  <version>0.2.8</version>
   <description>rqt_rviz provides a GUI plugin embedding RViz.</description>
   <maintainer email="scholz@sim.tu-darmstadt.de">Dorian Scholz</maintainer>
 
   <license>BSD</license>
 
   <url type="website">http://ros.org/wiki/rqt_rviz</url>
-  <url type="repository">https://github.com/ros-visualization/rqt</url>
-  <url type="bugtracker">https://github.com/ros-visualization/rqt/issues</url>
+  <url type="repository">https://github.com/ros-visualization/rqt_robot_plugins</url>
+  <url type="bugtracker">https://github.com/ros-visualization/rqt_robot_plugins/issues</url>
 
   <author>Dorian Scholz</author>
 
