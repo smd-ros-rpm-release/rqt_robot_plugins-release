@@ -32,8 +32,8 @@
 
 import rospy
 from diagnostic_msgs.msg import DiagnosticStatus
-from QtCore import QMutex, QMutexLocker, QSize, QTimer
-from rqt_robot_monitor import RobotMonitorWidget
+from python_qt_binding.QtCore import QMutex, QMutexLocker, QSize, QTimer
+from rqt_robot_monitor.robot_monitor import RobotMonitorWidget
 from .icon_tool_button import IconToolButton
 
 
@@ -97,6 +97,7 @@ class MonitorDashWidget(IconToolButton):
         self._stall_timer.stop()
         self._is_stale = True
         self.update_state(3)
+        self._top_level_state = 3
         self.setToolTip("Diagnostics: Stale\nNo message received on dashboard_agg in the last 5 seconds")
 
     def _show_monitor(self):
@@ -130,6 +131,7 @@ class MonitorDashWidget(IconToolButton):
                 self._monitor = None
 
     def shutdown_widget(self):
+        self._stall_timer.stop()
         if self._monitor:
             self._monitor.shutdown()
         self._diagnostics_toplevel_state_sub.unregister()
