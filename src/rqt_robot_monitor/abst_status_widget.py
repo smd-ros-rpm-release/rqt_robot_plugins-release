@@ -32,38 +32,37 @@
 #
 # Author: Isaac Saito
 
-import os
-
-import rospy
-
-from python_qt_binding.QtCore import Qt
 from python_qt_binding.QtGui import QWidget
 
-from .util_robot_monitor import Util
 
 class AbstractStatusWidget(QWidget):
-    
+    """
+    An abstract widget that consists of status display part and timeline part,
+    although this class doen't define any concrete design for those display
+    parts. Instead this only defines interface methods.
+    """
+
     def __init__(self):
         super(AbstractStatusWidget, self).__init__()
-   
-    def new_diag(self, msg, is_forced = False):
+
+    def new_diagnostic(self, msg, is_forced=False):
         """
-        
-        :param msg: This can be a function that takes either 
+        Needs overridden in derived classes.
+
+        :param msg: This can be a function that takes either
                     { DiagnosticArray, DiagnosticsStatus } as an argument.
-        :param is_forced: If True then update occurs even when paused. 
+        :param is_forced: If True then update occurs even when paused.
         """
         pass
-       
+
     def pause(self, msg):
         pass
-    
+
     def unpause(self, msg):
         pass
 
-    def get_color_for_value(queue_diagnostic, color_index):
+    def get_color_for_value(self, queue_diagnostic, color_index):
         pass
-    
+
     def on_pause(self, paused, diagnostic_arr):
         pass
-    
