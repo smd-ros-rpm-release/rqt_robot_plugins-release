@@ -1,0 +1,12 @@
+Source: ros-hydro-rqt-nav-view
+Section: misc
+Priority: extra
+Maintainer: Ze'ev Klapow <zklapow@willowgarage.com>
+Build-Depends: debhelper (>= 7.0.50~), ros-hydro-catkin
+Homepage: http://ros.org/wiki/rqt_nav_view
+Standards-Version: 3.9.2
+
+Package: ros-hydro-rqt-nav-view
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ros-hydro-geometry-msgs, ros-hydro-nav-msgs, ros-hydro-rospy, ros-hydro-rqt-gui, ros-hydro-rqt-gui-py, ros-hydro-tf
+Description: rqt_nav_view provides a gui for viewing navigation maps and paths.
