@@ -1,0 +1,12 @@
+Source: ros-groovy-rqt-nav-view
+Section: misc
+Priority: extra
+Maintainer: Ze'ev Klapow <zklapow@willowgarage.com>, Isaac Saito <isao.saito@mavs.uta.edu>
+Build-Depends: debhelper (>= 7.0.50~), ros-groovy-catkin
+Homepage: http://ros.org/wiki/rqt_nav_view
+Standards-Version: 3.9.2
+
+Package: ros-groovy-rqt-nav-view
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ros-groovy-geometry-msgs, ros-groovy-nav-msgs, ros-groovy-rospy, ros-groovy-rqt-gui, ros-groovy-rqt-gui-py, ros-groovy-tf
+Description: rqt_nav_view provides a gui for viewing navigation maps and paths.
