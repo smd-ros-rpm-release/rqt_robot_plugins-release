@@ -1,0 +1,12 @@
+Source: ros-groovy-rqt-moveit
+Section: misc
+Priority: extra
+Maintainer: Isaac Isao Saito <130s@alumni.smu.edu>
+Build-Depends: debhelper (>= 7.0.50~), ros-groovy-catkin
+Homepage: http://ros.org/wiki/rqt_moveit
+Standards-Version: 3.9.2
+
+Package: ros-groovy-rqt-moveit
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ros-groovy-moveit-ros, ros-groovy-rosnode, ros-groovy-rospy, ros-groovy-rqt-gui, ros-groovy-rqt-gui-py, ros-groovy-rqt-py-common, ros-groovy-rqt-topic, ros-groovy-sensor-msgs
+Description: A rqt-based monitoring tool for Moveit! motion planner. This is still very experimental.
