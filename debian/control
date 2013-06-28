@@ -1,0 +1,12 @@
+Source: ros-hydro-rqt-moveit
+Section: misc
+Priority: extra
+Maintainer: "Isaac Isao Saito <130s@alumni.smu.edu>"
+Build-Depends: debhelper (>= 7.0.50~), ros-hydro-catkin
+Homepage: http://ros.org/wiki/rqt_moveit
+Standards-Version: 3.9.2
+
+Package: ros-hydro-rqt-moveit
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ros-hydro-rosnode, ros-hydro-rospy, ros-hydro-rqt-gui, ros-hydro-rqt-gui-py, ros-hydro-rqt-py-common, ros-hydro-rqt-topic, ros-hydro-sensor-msgs
+Description: A rqt-based monitoring tool for Moveit! motion planner. This is still very experimental.
