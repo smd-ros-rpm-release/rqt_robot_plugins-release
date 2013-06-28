@@ -29,48 +29,45 @@
 # LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
 # ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
+#
+# Author: Isaac Saito
 
-# 4/18/13 Isaac Shouldn't this use python_qt_binding.QtGui instead of calling directly QtGui?
-from QtGui import QMenu, QToolButton
-from .icon_tool_button import IconToolButton
+from rqt_py_common.plugin_container_widget import PluginContainerWidget
+from rqt_gui_py.plugin import Plugin
+
+from rqt_moveit.moveit_widget import MoveitWidget
 
 
-class MenuDashWidget(IconToolButton):
-    """
-    A widget which displays a pop-up menu when clicked
+class MoveitPlugin(Plugin):
 
-    :param name: The name to give this widget.
-    :type name: str
-    :param icon: The icon to display in this widgets button.
-    :type icon: str
-    """
-    def __init__(self, name, icons=None, clicked_icons=None, icon_paths=[]):
-        if icons == None:
-            icons = [['bg-grey.svg', 'ic-motors.svg']]
-        super(MenuDashWidget, self).__init__(name, icons=icons, suppress_overlays=True, icon_paths=icon_paths)
-        self.setStyleSheet('QToolButton::menu-indicator {image: url(none.jpg);} QToolButton {border: none;}')
-        self.setPopupMode(QToolButton.InstantPopup)
-        self.update_state(0)
+    def __init__(self, plugin_context):
+        super(MoveitPlugin, self).__init__(plugin_context)
+        self._plugin_context = plugin_context
 
-        self.pressed.disconnect(self._pressed)
-        self.released.disconnect(self._released)
+        self._moveit_widget = MoveitWidget(self, plugin_context)
+        self.mainwidget = PluginContainerWidget(self._moveit_widget,
+                                                 True, False)
 
-        self._menu = QMenu()
-        self._menu.aboutToHide.connect(self._released)
-        self._menu.aboutToShow.connect(self._pressed)
+        if self._plugin_context.serial_number() > 1:
+            self.mainwidget.setWindowTitle(self.mainwidget.windowTitle() +
+                                   (' (%d)' % plugin_context.serial_number()))
 
-        self.setMenu(self._menu)
+        plugin_context.add_widget(self.mainwidget)
 
-    def add_separator(self):
-        return self._menu.addSeparator()
+    def get_widget(self):
+        return self.mainwidget
 
-    def add_action(self, name, callback):
+    def shutdown_plugin(self):
+        self.mainwidget.shutdown()
+
+    def save_settings(self, plugin_settings, instance_settings):
+        self.mainwidget.save_settings(plugin_settings, instance_settings)
+
+    def restore_settings(self, plugin_settings, instance_settings):
+        self.mainwidget.restore_settings(plugin_settings, instance_settings)
+
+    def _update_msg(self):
         """
-        Add an action to the menu, and return the newly created action.
-
-        :param name: The name of the action.
-        :type name: str
-        :param callback: Function to be called when this item is pressed.
-        :type callback: callable
+        Update necessary components (per topic) regularly
         """
-        return self._menu.addAction(name, callback)
+        self._moveit_widget.update_topic_table()
