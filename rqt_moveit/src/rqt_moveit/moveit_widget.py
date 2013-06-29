@@ -41,8 +41,11 @@ from python_qt_binding import loadUi
 from python_qt_binding.QtCore import QModelIndex, QTimer, Signal
 from python_qt_binding.QtGui import QStandardItem, QStandardItemModel, QWidget
 import rospkg
-from rosnode import rosnode_ping
+#from rosnode import rosnode_ping, ROSNodeIOException
+#from rosnode import ROSNodeIOException
 import rospy
+import rostopic
+from rqt_py_common.rqt_roscomm_util import RqtRoscommUtil
 from rqt_topic.topic_widget import TopicWidget
 
 
@@ -148,13 +151,24 @@ class MoveitWidget(QWidget):
         @type nodes_monitored: str[]
         """
         while self._is_checking_nodes:
+            rosnode_dynamically_loaded = __import__('rosnode')
+            #from rosnode import rosnode_ping
             for nodename in nodes_monitored:
                 #TODO: rosnode_ping prints when the node is not found.
                 # Currently I have no idea how to capture that from here.
-                is_node_running = rosnode_ping(nodename, 1)
+                try:
+                    #is_node_running = rosnode_ping(nodename, 1)
+                    is_node_running = rosnode_dynamically_loaded.rosnode_ping(
+                                                                 nodename, 1)
+                except rosnode_dynamically_loaded.ROSNodeIOException as e:
+                    #TODO: Needs to be indicated on GUI
+                    #      (eg. PluginContainerWidget)
+                    rospy.logerr(e.message)
+                    is_node_running = False
 
                 signal.emit(is_node_running, nodename)
                 rospy.logdebug('_update_output_nodes')
+            del rosnode_dynamically_loaded
             time.sleep(self._refresh_rate)
 
     def _init_monitor_parameters(self, params_monitored,
@@ -221,18 +235,30 @@ class MoveitWidget(QWidget):
         a way to generalize these 2.
 
         @type signal: Signal(bool, str)
-        @param signal: emitting a name of the parameter that's found.
+        @param_name signal: emitting a name of the parameter that's found.
         @type params_monitored: str[]
         """
+
         while self._is_checking_params:
-            for param in params_monitored:
+            # self._is_checking_params only turns to false when the plugin
+            # shuts down.
+
+            has_param = False
+
+            for param_name in params_monitored:
+                is_rosmaster_running = RqtRoscommUtil.is_roscore_running()
+
                 try:
-                    has_param = rospy.has_param(param)
+                    if is_rosmaster_running:
+                        # Only if rosmaster is running, check if the parameter
+                        # exists or not.
+                        has_param = rospy.has_param(param_name)
                 except rospy.exceptions.ROSException as e:
                     self.sig_sysmsg.emit(
                          'Exception upon rospy.has_param {}'.format(e.message))
-                signal.emit(has_param, param)
-                rospy.logdebug('check_param_alive: {}'.format(param))
+                signal.emit(has_param, param_name)
+                rospy.loginfo('has_param {}, check_param_alive: {}'.format(
+                                                      has_param, param_name))
             time.sleep(self._refresh_rate)
 
     def _update_output_parameters(self, has_param, param_name):
