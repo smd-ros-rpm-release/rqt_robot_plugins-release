@@ -1,0 +1,63 @@
+ros-hydro-rqt-robot-monitor (0.2.15-0quantal) quantal; urgency=high
+
+  * Correct and clean up dependencies
+
+ -- Isaac Saito <130s@alumni.smu.edu>  Wed, 24 Apr 2013 15:00:00 -0000
+
+ros-hydro-rqt-robot-monitor (0.2.14-0quantal) quantal; urgency=high
+
+
+
+ -- Isaac Saito <130s@alumni.smu.edu>  Thu, 11 Apr 2013 15:00:00 -0000
+
+ros-hydro-rqt-robot-monitor (0.2.13-0quantal) quantal; urgency=high
+
+
+
+ -- Isaac Saito <130s@alumni.smu.edu>  Mon, 08 Apr 2013 15:00:00 -0000
+
+ros-hydro-rqt-robot-monitor (0.2.12-0quantal) quantal; urgency=high
+
+
+
+ -- Isaac Saito <130s@alumni.smu.edu>  Sat, 06 Apr 2013 09:22:00 -0000
+
+ros-hydro-rqt-robot-monitor (0.2.11-0quantal) quantal; urgency=high
+
+
+
+ -- Isaac Saito <130s@alumni.smu.edu>  Sat, 06 Apr 2013 09:00:00 -0000
+
+ros-hydro-rqt-robot-monitor (0.2.10-0quantal) quantal; urgency=high
+
+
+
+ -- Isaac Saito <130s@alumni.smu.edu>  Wed, 03 Apr 2013 15:00:00 -0000
+
+ros-hydro-rqt-robot-monitor (0.2.9-0quantal) quantal; urgency=high
+
+  * Fix
+    
+      * now run with pyside (it used to be not working with it w/o having been noticed).
+      * Call .ui file in .ui is now successfully working
+    
+  * Refactoring
+    
+      * Now TimelinePane uses .ui file
+    
+
+ -- Isaac Saito <130s@alumni.smu.edu>  Wed, 06 Mar 2013 15:00:00 -0000
+
+ros-hydro-rqt-robot-monitor (0.2.8-0quantal) quantal; urgency=high
+
+
+
+ -- Isaac Saito <130s@alumni.smu.edu>  Thu, 10 Jan 2013 15:00:00 -0000
+
+ros-hydro-rqt-robot-monitor (0.2.7-0quantal) quantal; urgency=high
+
+  * first public release for Groovy
+
+ -- Isaac Saito <130s@alumni.smu.edu>  Sun, 23 Dec 2012 06:58:00 -0000
+
+
