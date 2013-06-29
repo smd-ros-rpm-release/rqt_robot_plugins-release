@@ -1,0 +1,12 @@
+Source: ros-hydro-rqt-tf-tree
+Section: misc
+Priority: extra
+Maintainer: "Aaron Blasdel <ablasdel@gmail.com>, Isaac Saito <isao.saito@mavs.uta.edu>"
+Build-Depends: debhelper (>= 7.0.50~), ros-hydro-catkin
+Homepage: http://ros.org/wiki/rqt_tf_tree
+Standards-Version: 3.9.2
+
+Package: ros-hydro-rqt-tf-tree
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, python-rospkg, ros-hydro-geometry-msgs, ros-hydro-qt-dotgraph, ros-hydro-rospy, ros-hydro-rqt-graph, ros-hydro-rqt-gui, ros-hydro-rqt-gui-py, ros-hydro-tf2, ros-hydro-tf2-msgs, ros-hydro-tf2-ros
+Description: rqt_tf_tree provides a GUI plugin for visualizing the ROS TF frame tree.
