@@ -2,8 +2,9 @@
 Changelog for package rqt_robot_plugins
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.2.16 (2013-07-09)
+-------------------
+* First public release into Hydro
 * add stress on how to run rqt the easiest
 
 0.2.15 (2013-04-25)
@@ -11,7 +12,7 @@ Forthcoming
 
 0.2.14 (2013-04-12)
 -------------------
-* Adding back rqt_tf_tree (`#19 <https://github.com/130s/rqt_robot_plugins/issues/19>`_), now that rqt_tf_tree is verified to be building on buildfarm (eg. http://jenkins.willowgarage.com:8080/view/GbinP64/job/ros-groovy-rqt-tf-tree_binarydeb_precise_amd64/)
+* Adding back rqt_tf_tree (`#19 <https://github.com/130s/rqt_robot_plugins/issues/19>`_), now that rqt_tf_tree is verified to be building on buildfarm (eg. `link http://jenkins.willowgarage.com:8080/view/GbinP64/job/ros-groovy-rqt-tf-tree_binarydeb_precise_amd64/`_)
 
 0.2.13 (2013-04-09)
 -------------------
@@ -20,7 +21,7 @@ Forthcoming
 
 0.2.12 (2013-04-06 18:22)
 -------------------------
-* Add CMakeLists.txt based on new catkin spec (ref. http://answers.ros.org/question/59648/catkin-metapackage-now-requires-cmakeliststxt/)
+* Add CMakeLists.txt based on new catkin spec (`ref. http://answers.ros.org/question/59648/catkin-metapackage-now-requires-cmakeliststxt/`_)
 
 0.2.11 (2013-04-06 18:00)
 -------------------------
