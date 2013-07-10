@@ -2,13 +2,12 @@
 Changelog for package rqt_tf_tree
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
-* Will be released by @130s
+0.2.16 (2013-07-09)
+-------------------
+* First public release into Hydro
 
 0.2.15 (2013-04-25)
 -------------------
-* Correct and clean up dependencies @130s
 
 0.2.14 (2013-04-12)
 -------------------
@@ -21,7 +20,6 @@ Forthcoming
 
 0.2.11 (2013-04-06 18:00)
 -------------------------
-* Correct dependency to build and run without problem @130s
 
 0.2.10 (2013-04-04)
 -------------------
