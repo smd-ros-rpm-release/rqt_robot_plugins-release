@@ -1,0 +1,76 @@
+ros-hydro-rqt-nav-view (0.2.16-0quantal) quantal; urgency=high
+
+  * First public release for Hydro @130s
+
+ -- Ze'ev Klapow <zklapow@willowgarage.com>  Mon, 08 Jul 2013 15:00:00 -0000
+
+ros-hydro-rqt-nav-view (0.2.15-0quantal) quantal; urgency=high
+
+
+
+ -- Ze'ev Klapow <zklapow@willowgarage.com>  Wed, 24 Apr 2013 15:00:00 -0000
+
+ros-hydro-rqt-nav-view (0.2.14-0quantal) quantal; urgency=high
+
+
+
+ -- Ze'ev Klapow <zklapow@willowgarage.com>  Thu, 11 Apr 2013 15:00:00 -0000
+
+ros-hydro-rqt-nav-view (0.2.13-0quantal) quantal; urgency=high
+
+
+
+ -- Ze'ev Klapow <zklapow@willowgarage.com>  Mon, 08 Apr 2013 15:00:00 -0000
+
+ros-hydro-rqt-nav-view (0.2.12-0quantal) quantal; urgency=high
+
+
+
+ -- Ze'ev Klapow <zklapow@willowgarage.com>  Sat, 06 Apr 2013 09:22:00 -0000
+
+ros-hydro-rqt-nav-view (0.2.11-0quantal) quantal; urgency=high
+
+
+
+ -- Ze'ev Klapow <zklapow@willowgarage.com>  Sat, 06 Apr 2013 09:00:00 -0000
+
+ros-hydro-rqt-nav-view (0.2.10-0quantal) quantal; urgency=high
+
+
+
+ -- Ze'ev Klapow <zklapow@willowgarage.com>  Wed, 03 Apr 2013 15:00:00 -0000
+
+ros-hydro-rqt-nav-view (0.2.9-0quantal) quantal; urgency=high
+
+  * Ensured that nav_view_dash_widget removes the widget when clicked a second time
+
+ -- Ze'ev Klapow <zklapow@willowgarage.com>  Wed, 06 Mar 2013 15:00:00 -0000
+
+ros-hydro-rqt-nav-view (0.2.8-0quantal) quantal; urgency=high
+
+  * Fix
+    
+      * Map scrolling fixed.
+      * Drag and drop works everywhere now.
+      * Fix map colors.
+    
+  * Enhancement
+    
+      * NavFn should be the default.
+      * Goals can now be set.
+      * Initial pose can now be set.
+      * Don't update without map.
+      * Don't regenerate unless map changes.
+      * Only use one transform listener.
+      * Topics can be drag and dropped.
+    
+
+ -- Ze'ev Klapow <zklapow@willowgarage.com>  Thu, 10 Jan 2013 15:00:00 -0000
+
+ros-hydro-rqt-nav-view (0.2.7-0quantal) quantal; urgency=high
+
+  * First public release for Groovy
+
+ -- Ze'ev Klapow <zklapow@willowgarage.com>  Sun, 23 Dec 2012 06:58:00 -0000
+
+
