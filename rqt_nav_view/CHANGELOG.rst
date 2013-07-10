@@ -2,13 +2,12 @@
 Changelog for package rqt_nav_view
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
-* Will be released by @130s
+0.2.16 (2013-07-09)
+-------------------
+* First public release for Hydro @130s
 
 0.2.15 (2013-04-25)
 -------------------
-* Correct and clean up dependencies.
 
 0.2.14 (2013-04-12)
 -------------------
@@ -24,7 +23,6 @@ Forthcoming
 
 0.2.10 (2013-04-04)
 -------------------
-* maintainer added @130s
 
 0.2.9 (2013-03-07)
 ------------------
@@ -50,4 +48,4 @@ Forthcoming
 
 0.2.7 (2012-12-23 15:58)
 ------------------------
-* first public release for Groovy
+* First public release for Groovy
