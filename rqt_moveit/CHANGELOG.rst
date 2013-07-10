@@ -2,9 +2,10 @@
 Changelog for package rqt_moveit
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
-* Fix to Issue #25: Monitoring parameter doesn't turn to "No" even after the params are gone bug (`ros-visualization/rqt_robot_plugins#25 <https://github.com/ros-visualization/rqt_robot_plugins/issues/25>`_)
+0.2.16 (2013-07-09)
+-------------------
+* First public release for Hydro
+* Fix; Monitoring parameter doesn't turn to "No" even after the params are gone bug (#25 `ros-visualization/rqt_robot_plugins#25 <https://github.com/ros-visualization/rqt_robot_plugins/issues/25>`_)
 
 * Refactoring
 
@@ -34,6 +35,6 @@ Forthcoming
 
 0.2.13 (2013-04-09)
 -------------------
-* first public release for Groovy
+* First public release for Groovy
 
 
