@@ -2,12 +2,12 @@
 Changelog for package rqt_robot_monitor
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.2.16 (2013-07-09)
+-------------------
+* First public release into Hydro
 
 0.2.15 (2013-04-25)
 -------------------
-* Correct and clean up dependencies
 
 0.2.14 (2013-04-12)
 -------------------
@@ -40,4 +40,4 @@ Forthcoming
 
 0.2.7 (2012-12-23 15:58)
 ------------------------
-* first public release for Groovy
+* first public release into Groovy
