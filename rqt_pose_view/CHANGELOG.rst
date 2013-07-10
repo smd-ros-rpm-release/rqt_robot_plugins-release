@@ -2,13 +2,12 @@
 Changelog for package rqt_pose_view
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
-* Will be released by @130s
+0.2.16 (2013-07-09)
+-------------------
+* First public release for Hydro
 
 0.2.15 (2013-04-25)
 -------------------
-* fix dependency corrupted by recent modification
 
 0.2.14 (2013-04-12)
 -------------------
@@ -24,7 +23,6 @@ Forthcoming
 
 0.2.10 (2013-04-04)
 -------------------
-* maintainer added @130s
 
 0.2.9 (2013-03-07)
 ------------------
@@ -56,4 +54,4 @@ Forthcoming
 0.2.0 (2012-12-20 17:39)
 ------------------------
 * catkinizing
-* first public release for Groovy
+* First public release for Groovy
