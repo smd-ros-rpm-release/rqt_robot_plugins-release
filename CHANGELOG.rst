@@ -2,13 +2,12 @@
 Changelog for package rqt_runtime_monitor
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
-* Will be released by @130s
+0.2.16 (2013-07-09)
+-------------------
+* First public release into Hydro
 
 0.2.15 (2013-04-25)
 -------------------
-* Correct and clean up dependencies @130s
 
 0.2.14 (2013-04-12)
 -------------------
@@ -56,4 +55,4 @@ Forthcoming
 ------------------------
 * fix missing roslib
 * catkinizing
-* first public release for Groovy
+* first public release into Groovy
