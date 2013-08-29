@@ -1,0 +1,111 @@
+ros-hydro-rqt-tf-tree (0.3.0-0raring) raring; urgency=high
+
+
+
+ -- Isaac Saito <isao.saito@mavs.uta.edu>  Wed, 28 Aug 2013 07:00:00 -0000
+
+ros-hydro-rqt-tf-tree (0.2.16-0raring) raring; urgency=high
+
+  * First public release into Hydro
+
+ -- Isaac Saito <isao.saito@mavs.uta.edu>  Tue, 09 Jul 2013 07:00:00 -0000
+
+ros-hydro-rqt-tf-tree (0.2.15-0raring) raring; urgency=high
+
+
+
+ -- Aaron Blasdel <ablasdel@gmail.com>  Thu, 25 Apr 2013 07:00:00 -0000
+
+ros-hydro-rqt-tf-tree (0.2.14-0raring) raring; urgency=high
+
+
+
+ -- Aaron Blasdel <ablasdel@gmail.com>  Fri, 12 Apr 2013 07:00:00 -0000
+
+ros-hydro-rqt-tf-tree (0.2.13-0raring) raring; urgency=high
+
+
+
+ -- Aaron Blasdel <ablasdel@gmail.com>  Tue, 09 Apr 2013 07:00:00 -0000
+
+ros-hydro-rqt-tf-tree (0.2.12-0raring) raring; urgency=high
+
+
+
+ -- Aaron Blasdel <ablasdel@gmail.com>  Sun, 07 Apr 2013 01:22:00 -0000
+
+ros-hydro-rqt-tf-tree (0.2.11-0raring) raring; urgency=high
+
+
+
+ -- Aaron Blasdel <ablasdel@gmail.com>  Sun, 07 Apr 2013 01:00:00 -0000
+
+ros-hydro-rqt-tf-tree (0.2.10-0raring) raring; urgency=high
+
+
+
+ -- Aaron Blasdel <ablasdel@gmail.com>  Thu, 04 Apr 2013 07:00:00 -0000
+
+ros-hydro-rqt-tf-tree (0.2.9-0raring) raring; urgency=high
+
+
+
+ -- Aaron Blasdel <ablasdel@gmail.com>  Thu, 07 Mar 2013 08:00:00 -0000
+
+ros-hydro-rqt-tf-tree (0.2.8-0raring) raring; urgency=high
+
+
+
+ -- Aaron Blasdel <ablasdel@gmail.com>  Fri, 11 Jan 2013 08:00:00 -0000
+
+ros-hydro-rqt-tf-tree (0.2.7-0raring) raring; urgency=high
+
+
+
+ -- Aaron Blasdel <ablasdel@gmail.com>  Sun, 23 Dec 2012 23:58:00 -0000
+
+ros-hydro-rqt-tf-tree (0.2.6-0raring) raring; urgency=high
+
+
+
+ -- Aaron Blasdel <ablasdel@gmail.com>  Sun, 23 Dec 2012 09:57:00 -0000
+
+ros-hydro-rqt-tf-tree (0.2.5-0raring) raring; urgency=high
+
+
+
+ -- Aaron Blasdel <ablasdel@gmail.com>  Sat, 22 Dec 2012 03:11:00 -0000
+
+ros-hydro-rqt-tf-tree (0.2.4-0raring) raring; urgency=high
+
+
+
+ -- Aaron Blasdel <ablasdel@gmail.com>  Fri, 21 Dec 2012 09:13:00 -0000
+
+ros-hydro-rqt-tf-tree (0.2.3-0raring) raring; urgency=high
+
+
+
+ -- Aaron Blasdel <ablasdel@gmail.com>  Fri, 21 Dec 2012 08:24:00 -0000
+
+ros-hydro-rqt-tf-tree (0.2.2-0raring) raring; urgency=high
+
+  * Disable dependency to tf2 (that's not building) for now
+
+ -- Aaron Blasdel <ablasdel@gmail.com>  Fri, 21 Dec 2012 02:29:00 -0000
+
+ros-hydro-rqt-tf-tree (0.2.1-0raring) raring; urgency=high
+
+
+
+ -- Aaron Blasdel <ablasdel@gmail.com>  Fri, 21 Dec 2012 01:47:00 -0000
+
+ros-hydro-rqt-tf-tree (0.2.0-0raring) raring; urgency=high
+
+  * rqt_tf_tree plugin disabled until tf2 is catkinized
+  * catkinizing
+  * first public release for Groovy
+
+ -- Aaron Blasdel <ablasdel@gmail.com>  Fri, 21 Dec 2012 01:39:00 -0000
+
+
