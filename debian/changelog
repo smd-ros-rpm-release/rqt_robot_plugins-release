@@ -1,0 +1,116 @@
+ros-hydro-rqt-pose-view (0.3.1-0raring) raring; urgency=high
+
+
+
+ -- Dorian Scholz <scholz@sim.tu-darmstadt.de>  Wed, 09 Oct 2013 07:00:00 -0000
+
+ros-hydro-rqt-pose-view (0.3.0-0raring) raring; urgency=high
+
+
+
+ -- Dorian Scholz <scholz@sim.tu-darmstadt.de>  Wed, 28 Aug 2013 07:00:00 -0000
+
+ros-hydro-rqt-pose-view (0.2.16-0raring) raring; urgency=high
+
+  * First public release for Hydro
+
+ -- Dorian Scholz <scholz@sim.tu-darmstadt.de>  Tue, 09 Jul 2013 07:00:00 -0000
+
+ros-hydro-rqt-pose-view (0.2.15-0raring) raring; urgency=high
+
+
+
+ -- Dorian Scholz <scholz@sim.tu-darmstadt.de>  Thu, 25 Apr 2013 07:00:00 -0000
+
+ros-hydro-rqt-pose-view (0.2.14-0raring) raring; urgency=high
+
+
+
+ -- Dorian Scholz <scholz@sim.tu-darmstadt.de>  Fri, 12 Apr 2013 07:00:00 -0000
+
+ros-hydro-rqt-pose-view (0.2.13-0raring) raring; urgency=high
+
+
+
+ -- Dorian Scholz <scholz@sim.tu-darmstadt.de>  Tue, 09 Apr 2013 07:00:00 -0000
+
+ros-hydro-rqt-pose-view (0.2.12-0raring) raring; urgency=high
+
+
+
+ -- Dorian Scholz <scholz@sim.tu-darmstadt.de>  Sun, 07 Apr 2013 01:22:00 -0000
+
+ros-hydro-rqt-pose-view (0.2.11-0raring) raring; urgency=high
+
+
+
+ -- Dorian Scholz <scholz@sim.tu-darmstadt.de>  Sun, 07 Apr 2013 01:00:00 -0000
+
+ros-hydro-rqt-pose-view (0.2.10-0raring) raring; urgency=high
+
+
+
+ -- Dorian Scholz <scholz@sim.tu-darmstadt.de>  Thu, 04 Apr 2013 07:00:00 -0000
+
+ros-hydro-rqt-pose-view (0.2.9-0raring) raring; urgency=high
+
+
+
+ -- Dorian Scholz <scholz@sim.tu-darmstadt.de>  Thu, 07 Mar 2013 08:00:00 -0000
+
+ros-hydro-rqt-pose-view (0.2.8-0raring) raring; urgency=high
+
+
+
+ -- Dorian Scholz <scholz@sim.tu-darmstadt.de>  Fri, 11 Jan 2013 08:00:00 -0000
+
+ros-hydro-rqt-pose-view (0.2.7-0raring) raring; urgency=high
+
+
+
+ -- Dorian Scholz <scholz@sim.tu-darmstadt.de>  Sun, 23 Dec 2012 23:58:00 -0000
+
+ros-hydro-rqt-pose-view (0.2.6-0raring) raring; urgency=high
+
+
+
+ -- Dorian Scholz <scholz@sim.tu-darmstadt.de>  Sun, 23 Dec 2012 09:57:00 -0000
+
+ros-hydro-rqt-pose-view (0.2.5-0raring) raring; urgency=high
+
+
+
+ -- Dorian Scholz <scholz@sim.tu-darmstadt.de>  Sat, 22 Dec 2012 03:11:00 -0000
+
+ros-hydro-rqt-pose-view (0.2.4-0raring) raring; urgency=high
+
+
+
+ -- Dorian Scholz <scholz@sim.tu-darmstadt.de>  Fri, 21 Dec 2012 09:13:00 -0000
+
+ros-hydro-rqt-pose-view (0.2.3-0raring) raring; urgency=high
+
+
+
+ -- Dorian Scholz <scholz@sim.tu-darmstadt.de>  Fri, 21 Dec 2012 08:24:00 -0000
+
+ros-hydro-rqt-pose-view (0.2.2-0raring) raring; urgency=high
+
+
+
+ -- Dorian Scholz <scholz@sim.tu-darmstadt.de>  Fri, 21 Dec 2012 02:29:00 -0000
+
+ros-hydro-rqt-pose-view (0.2.1-0raring) raring; urgency=high
+
+
+
+ -- Dorian Scholz <scholz@sim.tu-darmstadt.de>  Fri, 21 Dec 2012 01:47:00 -0000
+
+ros-hydro-rqt-pose-view (0.2.0-0raring) raring; urgency=high
+
+  * catkinizing
+  * First public release for Groovy
+
+ -- Dorian Scholz <scholz@sim.tu-darmstadt.de>  Fri, 21 Dec 2012 01:39:00 -0000
+
+
