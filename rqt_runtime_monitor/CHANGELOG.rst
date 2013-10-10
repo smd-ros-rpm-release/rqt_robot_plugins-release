@@ -2,6 +2,10 @@
 Changelog for package rqt_runtime_monitor
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+0.3.1 (2013-10-09)
+------------------
+* fix refresh of html display for new messages (`#49 <https://github.com/ros-visualization/rqt_robot_plugins/issues/49>`_)
+
 0.3.0 (2013-08-28)
 ------------------
 * fix event handling (`#39 <https://github.com/ros-visualization/rqt_robot_plugins/issues/39>`_)

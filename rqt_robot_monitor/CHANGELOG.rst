@@ -2,6 +2,9 @@
 Changelog for package rqt_robot_monitor
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+0.3.1 (2013-10-09)
+------------------
+
 0.3.0 (2013-08-28)
 ------------------
 * fix indication when not receiving deagnostic data (`#35 <https://github.com/ros-visualization/rqt_robot_plugins/issues/35>`_)
