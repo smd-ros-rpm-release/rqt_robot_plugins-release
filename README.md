@@ -1,3 +1,32 @@
+## rqt_robot_plugins - 0.3.2-0
+
+User `dthomas@drudge` released the packages in the `rqt_robot_plugins` repository by running `/usr/bin/bloom-release -r hydro -t hydro rqt_robot_plugins` on `Thu, 09 Jan 2014 00:02:42 -0000`
+
+These packages were released:
+- `rqt_moveit`
+- `rqt_nav_view`
+- `rqt_pose_view`
+- `rqt_robot_dashboard`
+- `rqt_robot_monitor`
+- `rqt_robot_plugins`
+- `rqt_robot_steering`
+- `rqt_runtime_monitor`
+- `rqt_rviz`
+- `rqt_tf_tree`
+
+Version of package(s) in repository `rqt_robot_plugins`:
+- rosdistro version: `0.3.1-0`
+- old version: `0.3.1-0`
+- new version: `0.3.2-0`
+
+Versions of tools used:
+- bloom version: `0.4.4`
+- catkin_pkg version: `0.1.24`
+- rosdep version: `0.10.24`
+- rosdistro version: `0.2.20`
+- vcstools version: `0.1.33`
+
+
 ## rqt_robot_plugins - 0.3.1-0
 
 User `dthomas@drudge` released the packages in the `rqt_robot_plugins` repository by running `/usr/bin/bloom-release -r groovy -t groovy rqt_robot_plugins` on `Thu, 10 Oct 2013 18:36:16 -0000`
