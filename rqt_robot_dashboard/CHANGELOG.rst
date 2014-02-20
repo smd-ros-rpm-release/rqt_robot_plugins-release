@@ -2,6 +2,12 @@
 Changelog for package rqt_robot_dashboard
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+0.3.3 (2014-01-28)
+------------------
+
+0.3.2 (2014-01-08)
+------------------
+
 0.3.1 (2013-10-09)
 ------------------
 * update dashboard to work with latest rqt_console (`ros-visualization/rqt_common_plugins#186 <https://github.com/ros-visualization/rqt_common_plugins/issues/186>`_)
