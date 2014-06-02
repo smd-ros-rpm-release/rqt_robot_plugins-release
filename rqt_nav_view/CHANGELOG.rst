@@ -2,6 +2,10 @@
 Changelog for package rqt_nav_view
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+0.3.5 (2014-06-02)
+------------------
+* use queue_size for Python publishers
+
 0.3.4 (2014-05-07)
 ------------------
 
