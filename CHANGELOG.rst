@@ -2,6 +2,16 @@
 Changelog for package rqt_runtime_monitor
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+0.3.6 (2014-07-11)
+------------------
+
+0.3.5 (2014-06-02)
+------------------
+
+0.3.4 (2014-05-07)
+------------------
+* fix selection persistence across state transitions (`#60 <https://github.com/ros-visualization/rqt_robot_plugins/pull/60>`_)
+
 0.3.3 (2014-01-28)
 ------------------
 * improve usability: fix selecting items, maintain current scroll position (`#59 <https://github.com/ros-visualization/rqt_robot_plugins/issues/59>`_)
