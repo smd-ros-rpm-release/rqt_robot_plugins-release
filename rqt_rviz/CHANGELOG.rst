@@ -2,6 +2,21 @@
 Changelog for package rqt_rviz
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+0.3.7 (2014-08-18)
+------------------
+* fix argument parsing (`#68 <https://github.com/ros-visualization/rqt_robot_plugins/issues/68>`_) (regression of 0.3.5)
+
+0.3.6 (2014-07-11)
+------------------
+
+0.3.5 (2014-06-02)
+------------------
+* fix compilation on OS X (`#64 <https://github.com/ros-visualization/rqt_robot_plugins/issues/64>`_)
+
+0.3.4 (2014-05-07)
+------------------
+* add menu hiding and config as command-line args (`#62 <https://github.com/ros-visualization/rqt_robot_plugins/pull/62>`_)
+
 0.3.3 (2014-01-28)
 ------------------
 
