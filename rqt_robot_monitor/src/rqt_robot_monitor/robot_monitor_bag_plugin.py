@@ -1,6 +1,8 @@
+#!/usr/bin/env python
+#
 # Software License Agreement (BSD License)
 #
-# Copyright (c) 2012, Willow Garage, Inc.
+# Copyright (c) 2014, Austin Hendrix
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -13,7 +15,7 @@
 #    copyright notice, this list of conditions and the following
 #    disclaimer in the documentation and/or other materials provided
 #    with the distribution.
-#  * Neither the name of Willow Garage, Inc. nor the names of its
+#  * Neither the name of Austin Hendrix. nor the names of its
 #    contributors may be used to endorse or promote products derived
 #    from this software without specific prior written permission.
 #
@@ -30,39 +32,44 @@
 # ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 #
-# Author: Isaac Saito
-
-from python_qt_binding.QtGui import QWidget
+# Author: Austin Hendrix
 
 
-class AbstractStatusWidget(QWidget):
-    """
-    An abstract widget that consists of status display part and timeline part,
-    although this class doen't define any concrete design for those display
-    parts. Instead this only defines interface methods.
-    """
+from rqt_bag.plugins.plugin import Plugin
+from rqt_bag import TopicMessageView
 
+from .robot_monitor import RobotMonitorWidget
+from diagnostic_msgs.msg import DiagnosticArray, DiagnosticStatus
+
+class RobotMonitorBagPlugin(Plugin):
     def __init__(self):
-        super(AbstractStatusWidget, self).__init__()
-
-    def new_diagnostic(self, msg, is_forced=False):
-        """
-        Needs overridden in derived classes.
-
-        :param msg: This can be a function that takes either
-                    { DiagnosticArray, DiagnosticsStatus } as an argument.
-        :param is_forced: If True then update occurs even when paused.
-        """
         pass
 
-    def pause(self, msg):
-        pass
+    def get_view_class(self):
+        return RobotMonitorBagView
 
-    def unpause(self, msg):
-        pass
+    def get_renderer_class(self):
+        return None
 
-    def get_color_for_value(self, queue_diagnostic, color_index):
-        pass
+    def get_message_types(self):
+        return ['diagnostic_msgs/DiagnosticArray']
 
-    def on_pause(self, paused, diagnostic_arr):
-        pass
+class RobotMonitorBagView(TopicMessageView):
+    name = 'Diagnostics Viewer'
+
+    def __init__(self, timeline, parent, topic):
+        super(RobotMonitorBagView, self).__init__(timeline, parent, topic)
+        
+        self._widget = RobotMonitorWidget(parent)
+        parent.layout().addWidget(self._widget)
+
+    def message_viewed(self, bag, msg_details):
+        msg = msg_details[1]
+        # generic conversion of DiagnosticStatus from bag type to current type
+        #  this should be fairly robust to minor changes in the message format
+        status = [DiagnosticStatus(**dict((slot, getattr(m, slot)) for slot in m.__slots__)) for m in msg.status]
+        msg = DiagnosticArray(msg.header, status)
+        self._widget.message_updated.emit(msg)
+
+    def close(self):
+        self._widget.shutdown()  # Closes unclosed popup windows.
