@@ -32,46 +32,59 @@
 #
 # Author: Isaac Saito, Ze'ev Klapow, Austin Hendrix
 
-from qt_gui.plugin import Plugin
+import os
 
-from .robot_monitor import RobotMonitorWidget
+from python_qt_binding import loadUi
+from python_qt_binding.QtCore import Signal, Slot
+from python_qt_binding.QtGui import QWidget
+import rospy
+import rospkg
 
+from .timeline import Timeline
 
-class RobotMonitorPlugin(Plugin):
-    def __init__(self, context):
+class TimelinePane(QWidget):
+    """
+    This class defines the pane where timeline and its related components
+    are displayed.
+    """
+
+    sig_update = Signal()
+
+    def __init__(self, parent):
         """
-        :type context: qt_gui.PluginContext
+        Because this class is intended to be instantiated via Qt's .ui file,
+        taking argument other than parent widget is not possible, which is
+        ported to set_timeline_data method. That said, set_timeline_data must
+        be called (soon) after an object of this is instantiated.
         """
-        super(RobotMonitorPlugin, self).__init__(context)
-        self._robot_monitor = RobotMonitorWidget(context, 'diagnostics_agg')
-        if context.serial_number() > 1:
-            self._robot_monitor.setWindowTitle(
-                 self._robot_monitor.windowTitle() +
-                      (' (%d)' % context.serial_number()))
-        context.add_widget(self._robot_monitor)
-        self.setObjectName('rqt Robot Monitor')
+        super(TimelinePane, self).__init__()
+        self._parent = parent
+        self._timeline = None
 
-    def shutdown_plugin(self):
-        """
-        Call RobotMonitorWidget's corresponding function.
+        rp = rospkg.RosPack()
+        ui_file = os.path.join(rp.get_path('rqt_robot_monitor'),
+                               'resource',
+                               'timelinepane.ui')
+        loadUi(ui_file, self)
 
-        Overriding Plugin's method.
-        """
-        self._robot_monitor.shutdown()  # Closes unclosed popup windows.
+        self._timeline_view.show()
 
-    def save_settings(self, plugin_settings, instance_settings):
-        """
-        Call RobotMonitorWidget's corresponding function.
+        self.sig_update.connect(self._timeline_view.redraw)
 
-        Overriding Plugin's method.
-        """
-        self._robot_monitor.save_settings(plugin_settings, instance_settings)
+    def set_timeline(self, timeline, name=None):
+        assert(self._timeline is None)
+        self._timeline = timeline
 
-    def restore_settings(self, plugin_settings, instance_settings):
-        """
-        Call RobotMonitorWidget's corresponding function.
+        self._timeline_view.set_timeline(timeline, name)
 
-        Overriding Plugin's method.
-        """
-        self._robot_monitor.restore_settings(plugin_settings,
-                                             instance_settings)
+        # connect pause button
+        self._pause_button.clicked[bool].connect(self._timeline.set_paused)
+        self._timeline.pause_changed[bool].connect(
+                self._pause_button.setChecked)
+
+        # bootstrap initial state
+        self._pause_button.setChecked(self._timeline.paused)
+        self.sig_update.emit()
+
+    def redraw(self):
+        self.sig_update.emit()
